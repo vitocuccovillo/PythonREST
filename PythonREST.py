@@ -1,4 +1,5 @@
 # codebase from: https://www.codementor.io/sagaragarwal94/building-a-basic-restful-api-in-python-58k02xsiq
+# I want to integrate this ORM for SQLite: https://github.com/coleifer/peewee
 
 from flask import Flask, request
 from flask_restful import Resource, Api
