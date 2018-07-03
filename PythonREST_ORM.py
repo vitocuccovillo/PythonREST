@@ -2,7 +2,7 @@
 # I want to integrate this ORM for SQLite: https://github.com/coleifer/peewee
 # quickstart at: http://docs.peewee-orm.com/en/latest/peewee/quickstart.html
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, Api
 from playhouse.shortcuts import model_to_dict
 import json
@@ -23,6 +23,7 @@ class GetEmployees(Resource):
         query_result = []
         for r in result: query_result.append(json.dumps(model_to_dict(r)))
         return query_result
+
 
 # class Employees(Resource):
 #     def get(self):
