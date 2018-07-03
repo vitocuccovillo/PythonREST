@@ -2,42 +2,22 @@
 # I want to integrate this ORM for SQLite: https://github.com/coleifer/peewee
 # quickstart at: http://docs.peewee-orm.com/en/latest/peewee/quickstart.html
 
-from flask import Flask, request
+from flask import Flask
 from flask_restful import Resource, Api
 from playhouse.shortcuts import model_to_dict
-from sqlalchemy import create_engine
-from json import dumps
 import json
-from flask import jsonify
-from peewee import *
+import Models
 
-
-#db_connect = create_engine("sqlite:///chinook.db")
+db = Models.db
 app = Flask(__name__)
 api = Api(app)
-db = SqliteDatabase("chinook.db")
-
-
-class BaseModel(Model):
-    """A base model that will use our Sqlite database."""
-    class Meta:
-        database = db
-
-
-class Employees(BaseModel):
-    EmployeeId = PrimaryKeyField()
-    FirstName = CharField(null=False)
-    LastName = CharField(null=False)
-
-    class Meta:
-        database = db
 
 
 class GetEmployees(Resource):
     def get(self):
         db.connect()
         result = []
-        for emp in Employees.select():
+        for emp in Models.Employees.select():
             result.append(emp)
         db.close()
         query_result = []
